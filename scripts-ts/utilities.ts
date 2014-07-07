@@ -102,7 +102,7 @@ module msrcryptoUtilities {
         return output;
     }
 
-    export function base64ToString(encodedString) {
+    export function base64ToString(encodedString: string): string {
         /// <param name="encodedString" type="String"/>
         /// <returns type="String"/>
 
@@ -119,12 +119,13 @@ module msrcryptoUtilities {
             return atob(encodedString);
         }
 		// PV changing apply
-        // return String.fromCharCode.apply(null, base64ToBytes(encodedString));
-        return String.fromCharCode(base64ToBytes(encodedString)[0]);
+		// return String.fromCharCode.apply(null, base64ToBytes(encodedString));
+		return RT.applyVariadic<number>(String, "fromCharCode", base64ToBytes(encodedString));
 
     }
 
-	export function base64ToBytes(encodedString) {
+	// PV: adding type annotation to encodedString got rid of runtime error -- TODO: see why
+	export function base64ToBytes(encodedString: string) {
         /// <param name="encodedString" type="String"/>
         /// <returns type="Array"/>
 
@@ -291,13 +292,14 @@ module msrcryptoUtilities {
         return result;
     }
 
-    export function xorVectors(a, b) {
+    export function xorVectors(a: number[], b: number[]): number[] {
         /// <summary>Exclusive OR (XOR) two arrays.</summary>
         /// <param name="a" type="Array">Input array.</param>
         /// <param name="b" type="Array">Input array.</param>
         /// <returns type="Array">XOR of the two arrays. The length is minimum of the two input array lengths.</returns>
         var length = Math.min(a.length, b.length),
-            res = new Array(length);
+		// PV: adding type here seems to fix RT error
+            res = new Array<number>(length);
         for (var i = 0 ; i < length ; i += 1) {
             res[i] = a[i] ^ b[i];
         }

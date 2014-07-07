@@ -11,7 +11,18 @@
 
 // These Known Answer Tests (KAT) are taken from Windows CNG FIPS 140-2 verification effort,
 // which was provided by Windows CNG FIPS certification lab (CMVP) for AES-256 no derivation function.
-var prngKAT = [
+
+
+// PV adding this
+interface IPrngKAT {
+	seed: number[];
+	personalizationString: number[];
+	additionalInput: number[][];
+	expected: number[][];
+}
+
+
+var prngKAT: IPrngKAT[] = [
     {
         seed: [0x2c, 0xb1, 0xca, 0x81, 0x54, 0xee, 0x07, 0x12,
             0x3b, 0x04, 0x11, 0x74, 0x64, 0xd7, 0xea, 0xe0,

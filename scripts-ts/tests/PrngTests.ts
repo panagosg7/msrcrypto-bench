@@ -33,6 +33,7 @@
 // which was provided by Windows CNG FIPS certification lab (CMVP) for AES-256 no derivation function.
 
 test("PRNG vectors", function () {
+
 	var numberOfTests = 0, i;
 	var testVectors = prngKAT;
 	for (i = 0; i < testVectors.length; i++) {
@@ -47,10 +48,11 @@ test("PRNG vectors", function () {
 	for (i = 0; i < testVectors.length; i++) {
 
 		var seed = testVectors[i].seed;
-		var personalizationString = testVectors[i].personalizationString;
+		var tmp = testVectors[i];
+		var personalizationString: number[] = tmp.personalizationString;
 		var additionalInputArray = testVectors[i].additionalInput;
 		var expectedArray = testVectors[i].expected;
-		var randomBytes;
+		var randomBytes: number[];
 
 		msrcryptoPseudoRandom.init(seed, personalizationString);
 
@@ -86,56 +88,4 @@ test("PRNG init", function () {
 		ok(true, "PRNG Init/getBytes passed [" + i.toString() + "]");
 	}
 });
-
-
-/////////////////////////////////////////////////////////////////////////
-// Run on node.js only
-
-declare var module: any;
-declare var unescape: (any) => any;
-
-if (module && typeof module !== 'undefined' && module.exports) {
-
-	var getParam = function(key) {
-		// Find the key and everything up to the ampersand delimiter
-		var value = RegExp("" + key + "[^&]+").exec(window.location.search);
-
-		// Return the unescaped value minus everything starting from the equals sign or an empty string
-		return unescape(!!value ? value.toString().replace(/^[^=]+./, "") : "");
-	}
-
-	var _testRunFinished = function(results: DoneCallbackObject) {
-
-		var testId = getParam("testid");
-
-		if (testId) {
-
-			//dotNet.postResults(testId, JSON.stringify(results), JSON.stringify(testFailures));
-
-		}
-
-	}
-
-	var testFailures = [];
-
-	// PV adding type annotation
-	var _testDone = function(result: TestDoneCallbackObject) {
-
-	}
-
-
-	var _log = function(results: LogCallbackObject) {
-
-		if (results.result == false) {
-			testFailures.push(results);
-		}
-	}
-
-	testDone(_testDone);
-
-	done(_testRunFinished);
-
-	log(_log);
-
-}
 

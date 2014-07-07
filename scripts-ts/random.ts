@@ -40,7 +40,7 @@ class MsrcryptoPrng {
 	// reseedCounter: the number of requests for pseudorandom bits since instantiation/reseeding
 	// reseedInterval: Maximum number of generate calls per seed or reseed. SP800-90A says 2^48 for AES, we use 2^24.
 	private key;
-	private v;
+	private v: number[];
 	private keyLen;
 	private seedLen;
 	private reseedCounter = 1;
@@ -115,7 +115,7 @@ class MsrcryptoPrng {
 	private update(providedData) {
 		/// <summary>Add the providedData to the internal entropy pool, and update internal state.</summary>
 		/// <param name="providedData" type="Array">Input to add to the internal entropy pool.</param>
-		var temp = [];
+		var temp: number[] = [];
 		var blockCipher = new msrcryptoBlockCipher.aes(this.key);
 		while (temp.length < this.seedLen) {
 			this.addOne(this.v);
@@ -128,7 +128,7 @@ class MsrcryptoPrng {
 		this.v = temp.slice(this.keyLen);
 	}
 
-	private generate(requestedBytes,/*@optional*/ additionalInput) {
+	private generate(requestedBytes,/*@optional*/ additionalInput): number[] {
 		/// <summary>Generate pseudo-random bits, and update the internal PRNG state.</summary>
 		/// <param name="requestedBytes" type="Number">Number of pseudorandom bytes to be returned.</param>
 		/// <param name="additionalInput" type="Array">Application-provided additional input array (optional).</param>
@@ -147,7 +147,7 @@ class MsrcryptoPrng {
 		} else {
 			additionalInput = msrcryptoUtilities.getVector(this.seedLen);
 		}
-		var temp = [];
+		var temp: number[] = [];
 		var blockCipher = new msrcryptoBlockCipher.aes(this.key);
 		while (temp.length < requestedBytes) {
 			this.addOne(this.v);
@@ -177,7 +177,7 @@ class MsrcryptoPrng {
 		this.reseed(entropy, personalization);
 		this.initialized = true;
 	}
-	public getBytes(length, /*@optional*/ additionalInput?) {
+	public getBytes(length, /*@optional*/ additionalInput?): number[] {
 		if (!this.initialized) {
 			throw new Error("can't get randomness before initialization");
 		}
