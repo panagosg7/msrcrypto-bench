@@ -1,0 +1,3 @@
+node ../../../../built/local/tsc.js  --relaxNullChecks --nowarn 7051 --nowarn 7083  --nowarn 7047  --nowarn 7081 --nowarn 7061 --nowarn 7087 --nowarn 7052 --nowarn 7058 --nowarn 7038 --generics --safe --noGetters --removeComments -propagateEnumConstants -t ES5  --module commonjs --skipInstrumentation qunit-1.14.0.ts hof-00.ts  -out hof-00.js
+
+node ../../../../built/local/tsc.js  --relaxNullChecks --nowarn 7051 --nowarn 7083  --nowarn 7047  --nowarn 7081 --nowarn 7061 --nowarn 7087 --nowarn 7052 --nowarn 7058 --nowarn 7038 --generics --safe --noGetters --removeComments -propagateEnumConstants -t ES5  --module commonjs --skipInstrumentation qunit-1.14.0.ts hof-00-bad.ts -out hof-00-bad.js
