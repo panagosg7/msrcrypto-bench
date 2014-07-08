@@ -24,7 +24,7 @@
 /// #endregion JSCop/JsHint
 
 // PV 
-///<reference path='references.ts' />
+// /<reference path='references.ts' />
 
 module msrcryptoBlockCipher {
 
