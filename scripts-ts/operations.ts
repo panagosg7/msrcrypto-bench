@@ -11,13 +11,13 @@
 
 module operations {
 
-	export var register = function (operationType, algorithmName, functionToCall) {
+	export var register = function (operationType: string, algorithmName, functionToCall) {
 
-		if (!operations[operationType]) {
+		if (!(<any>operations)[operationType]) {
 			(<any>operations)[operationType] = {};
 		}
 
-		var op = operations[operationType];
+		var op = (<any>operations)[operationType];
 
 		if (!op[algorithmName]) {
 			op[algorithmName] = functionToCall;
@@ -26,11 +26,11 @@ module operations {
 	}
 
 	export var exists = function (operationType, algorithmName) {
-		if (!operations[operationType]) {
+		if (!(<any>operations)[operationType]) {
 			return false;
 		}
 
-		return (operations[operationType][algorithmName]) ? true : false;
+		return ((<any>operations)[operationType][algorithmName]) ? true : false;
 	}
 
 }

@@ -1,0 +1,17 @@
+We followed the same procedure for the Microsoft Research JavaScript
+Cryptography Library
+(http://research.microsoft.com/en-us/downloads/29f9385d-da4c-479a-b2ea-2a7bb335d727/).
+Only this time migration required rewriting the code to follow a class-based
+structure, due to the use of functions as constructors. Constructor functions
+do not get registered with the runtime system in the way class definitions do,
+so all relevant static information would be lost. Converting functions to
+classes was still straightforward. The original code base was also commented
+with suggestred types for function signatures, that despite being relatively
+imprecise (e.g., Array instead of Array<number>), were still of use in
+producing reasonable TypeScript signatures. Information regarding optional
+arguments was also part of these annotations, which is necessary to typecheck
+functions that expect a varying number of arguments.
+
+\panos{I only have partial results that show a 5-10x slow down using a version 
+where top-level structures have been transformed into classes/modules but minimal 
+annotations have been added thereafter.}

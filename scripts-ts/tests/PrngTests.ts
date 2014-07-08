@@ -26,12 +26,6 @@
 /// <reference path="../qunit/qunit-1.14.0.ts" />
 
 
-
-		// <reference path='../global.ts' />
-		// <reference path='../utilities.ts' />
-		// <reference path='../random.ts' />
-		// <reference path='../aes.ts' />
-
 /// <reference path="../testVectors/tv_prng.ts" />
 
 
