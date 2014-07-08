@@ -20,11 +20,12 @@
 
 /// <reference path='../../../../../src/compiler/typecheck/sound/rt.ts' />
 
+///<reference path='../references.ts' />
+
 /// <reference path="../qunit/qunit.d.ts" />
 /// <reference path="../qunit/qunit-1.14.0.ts" />
 
 
-///<reference path='../references.ts' />
 
 		// <reference path='../global.ts' />
 		// <reference path='../utilities.ts' />
